@@ -1,25 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
-function App() {
+function MyButton() {
+  const [count, setCount] = useState(3);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button style={{
+      width: "150px",
+      height: "150px",
+      backgroundColor: "black",
+      color: "white",
+      margin: "10px",
+      borderRadius: "50%"
+    }} onClick={handleClick}>
+      Clicked {count} times
+    </button>
   );
 }
 
-export default App;
+export default function MyApp() {
+  return (
+    <div style={{
+      maxWidth: "350px",
+      minHeight: "100vh",
+      backgroundColor: "#eee",
+      padding: "15px",
+      margin: "20px auto",
+      borderRadius: "5px",
+      border: "1px solid #ddd"
+    }}>
+      <h1>Counters that update separately</h1>
+      <MyButton />
+      <MyButton />
+    </div>
+  );
+}
