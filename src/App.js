@@ -1,41 +1,94 @@
 import './App.css';
-import { useState } from 'react';
 
-function MyButton() {
-  const [count, setCount] = useState(3);
-
-  function handleClick() {
-    setCount(count + 1);
-  }
-
+function ProductCategoryRow({ category }) {
   return (
-    <button style={{
-      width: "150px",
-      height: "150px",
-      backgroundColor: "black",
-      color: "white",
-      margin: "10px",
-      borderRadius: "50%"
-    }} onClick={handleClick}>
-      Clicked {count} times
-    </button>
+    <tr>
+      <th colSpan="2">
+        {category}
+      </th>
+    </tr>
   );
 }
 
-export default function MyApp() {
+function ProductRow({ product }) {
+  const name = product.stocked ? product.name :
+    <span style={{ color: 'red' }}>
+      {product.name}
+    </span>;
+
   return (
-    <div style={{
-      maxWidth: "350px",
-      minHeight: "100vh",
-      backgroundColor: "#eee",
-      padding: "15px",
-      margin: "20px auto",
-      borderRadius: "5px",
-      border: "1px solid #ddd"
-    }}>
-      <h1>Counters that update separately</h1>
-      <MyButton />
-      <MyButton />
+    <tr>
+      <td>{name}</td>
+      <td>{product.price}</td>
+    </tr>
+  );
+}
+
+function ProductTable({ products }) {
+  const rows = [];
+  let lastCategory = null;
+
+  products.forEach((product) => {
+    if (product.category !== lastCategory) {
+      rows.push(
+        <ProductCategoryRow
+          category={product.category}
+          key={product.category} />
+      );
+    }
+    rows.push(
+      <ProductRow
+        product={product}
+        key={product.name} />
+    );
+    lastCategory = product.category;
+  });
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Price</td>
+        </tr>
+      </thead>
+      <tbody>
+        {rows}
+      </tbody>
+    </table>
+  );
+}
+
+function SearchBar() {
+  return (
+    <form>
+      <input type="text" placeholder='검색하기..' />
+      <label>
+        <input type="checkbox" />
+        {' '}
+        Only show products in stock
+      </label>
+    </form>
+  );
+}
+
+function FilterableProductTable({ products }) {
+  return (
+    <div>
+      <SearchBar />
+      <ProductTable products={products} />
     </div>
   );
+}
+
+const PRODUCTS = [
+  { category: "Fruits", price: "$1", stocked: true, name: "Apple" }, { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
+  { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
+  { category: "Vegetables", price: "$2", stocked: true, name: "Spinach" },
+  { category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin" },
+  { category: "Vegetables", price: "$1", stocked: true, name: "Peas" }
+];
+
+export default function App() {
+  return <FilterableProductTable products={PRODUCTS} />;
 }
