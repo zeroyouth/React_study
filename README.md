@@ -1,3 +1,10 @@
+# 2022-05-24
+
+![1](https://user-images.githubusercontent.com/86909942/169981509-16c04dc0-469f-4665-aaf5-e7012d0bae5c.gif)
+-useState 사용해서 사용자가 입력 변경할 때마다 변경사항 반영하도록 업데이트하기
+![image](https://user-images.githubusercontent.com/86909942/169982067-04b00984-cd55-4386-b97f-aab29eaa3725.png)
+[출처] : [https://beta.reactjs.org/learn/thinking-in-react
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
