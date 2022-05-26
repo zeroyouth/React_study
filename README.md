@@ -1,66 +1,35 @@
 # 2022-05-24
-> ### useState 사용해서 사용자가 입력 변경할 때마다 변경사항 반영하도록 업데이트하기
+> ### useState 사용하기 :  사용자가 입력 변경할 때마다 변경사항 반영하도록 업데이트하기
 ![1](https://user-images.githubusercontent.com/86909942/169981509-16c04dc0-469f-4665-aaf5-e7012d0bae5c.gif)
 
 
+# 2022-05-26
+> ### props 사용하기 : Clock.js에서 color및 time 두 개의 props를 부모컴포넌트(App.js)에서 받아왔다.
+> 1. props는 불변하다. 수정할 수 없고 읽기 전용 데이터다. You can’t change props. When you need interactivity, you’ll need to set state.
+> 2. 상위 컴포넌트(부모)가 하위 컴포넌트(자식)에 값을 전달할때 사용한다.(단방향 데이터 흐름 갖는다.)
+
+![Animation](https://user-images.githubusercontent.com/86909942/170503203-dfcc7397-213c-4115-ae88-d00a62dd3faa.gif)
 
 ```js
-function FilterableProductTable({ products }) {
-  const [filterText, setFilterText] = useState('');
-  const [inStockOnly, setInStockOnly] = useState(false);
-
+//Clock.js
+export default function Clock({ color, time }) {
   return (
-    <div>
-      <SearchBar 
-        filterText={filterText} 
-        inStockOnly={inStockOnly}
-        onFilterTextChange={setFilterText}
-        onInStockOnlyChange={setInStockOnly} />
-```
-
-```js
-function SearchBar({
-  filterText,
-  inStockOnly,
-  onFilterTextChange,
-  onInStockOnlyChange
-}) {
-  return (
-    <form>
-      <input
-        type="text"
-        value={filterText}
-        placeholder='검색하기..'
-        onChange={(e) => onFilterTextChange(e.target.value)} />
-      <label>
-        <input
-          type="checkbox"
-          checked={inStockOnly}
-          onChange={(e) => onInStockOnlyChange(e.target.checked)} />
-        {' '}
-        Only show products in stock
-      </label>
-    </form>
+    <h1 style={{ color: color }}>
+      {time}
+    </h1>
   );
 }
+
 ```
+
+
 [출처] : https://beta.reactjs.org/learn/thinking-in-react
 <hr/>
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 
