@@ -27,6 +27,8 @@ export default function Clock({ color, time }) {
 > - In JSX, `{cond ? <A /> : <B />}` means “if cond, render `<A />`, otherwise `<B />`”.
 > - In JSX, `{cond && <A />}` means “if cond, render `<A />`, otherwise nothing”.
 
+![20220527_172444](https://user-images.githubusercontent.com/86909942/170662547-b9851c54-1742-460d-a036-289a431db358.png)
+
 [출처] : https://beta.reactjs.org/learn/thinking-in-react
 
 <hr/>
