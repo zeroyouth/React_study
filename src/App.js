@@ -1,32 +1,35 @@
-import { useState, useEffect } from 'react';
-import Clock from './Clock.js';
-
-function useTime() {
-  const [time, setTime] = useState(() => new Date());
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return time;
+function Item({ name, isPacked }) {
+  return (
+    <li className="item">
+      {isPacked ? (
+        <del>
+          {name + '✔️'}
+        </del>
+      ) : (name + '🔥')
+      }
+    </li>
+  );
 }
 
-export default function App() {
-  const time = useTime();
-  const [color, setColor] = useState('lightcoral');
+
+export default function PackingList() {
   return (
-    <div>
-      <p>
-        색상을 고르시오 : {' '}
-        <select value={color} onChange={e => setColor(e.target.value)}>
-          <option value="lightcoral">라이트코랄</option>
-          <option value="midnightblue">미드나잇블루</option>
-          <option value="tomato">토마토</option>
-          <option value="rebeccapurple">레베카퍼플</option>
-        </select>
-      </p>
-      <Clock color={color} time={time.toLocaleTimeString()} />
-    </div>
+    <section>
+      <h1 style={{
+        color: "tomato",
+        paddingLeft: "40px",
+      }}>오늘 할 일</h1>
+      <ol>
+        <Item
+          isPacked={true}
+          name="사전 투표하기" />
+        <Item
+          isPacked={true}
+          name="학교 가기" />
+        <Item
+          isPacked={false}
+          name="리액트 공부하기" />
+      </ol>
+    </section>
   );
 }
